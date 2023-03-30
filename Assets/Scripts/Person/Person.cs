@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,20 +12,22 @@ public class Person : MonoBehaviour
 
     public void Start()
     {
-        _initPosition = transform.position; 
+        _initPosition = transform.position;
     }
 
     public void Respawn()
-    {   
+    {
         transform.position = _initPosition;
         StopCoroutine(_killAnimation);
     }
 
-    public void Kill() {
+    public void Kill()
+    {
         _killAnimation = StartCoroutine(KillAnimation());
     }
 
-    private IEnumerator KillAnimation() {
+    private IEnumerator KillAnimation()
+    {
         _die.Invoke();
         yield return new WaitForSeconds(_timeDie);
         Respawn();

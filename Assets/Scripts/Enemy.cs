@@ -32,8 +32,9 @@ public class Enemy : MonoBehaviour
     {
         Person _target;
 
-        if(collision.transform.TryGetComponent<Person>(out _target)) {
-            _target.Kill();   
+        if (collision.transform.TryGetComponent<Person>(out _target))
+        {
+            _target.Kill();
         }
     }
 }

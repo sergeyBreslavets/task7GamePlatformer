@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneratorMoney : MonoBehaviour
 {
     [SerializeField] private Money _enemy;
-   
+
     private int _maxCountEnemies = 0;
     private int _countEnemies = 0;
     private Transform[] _spawnPoints;
@@ -26,8 +25,9 @@ public class GeneratorMoney : MonoBehaviour
     public void SpawnMoreMoney()
     {
         _countEnemies--;
-        if(_countEnemies == 0)
-          StartCoroutine(Spawn());
+
+        if (_countEnemies == 0)
+            StartCoroutine(Spawn());
     }
 
     private IEnumerator Spawn()
@@ -37,7 +37,7 @@ public class GeneratorMoney : MonoBehaviour
         _spawnTarget = 0;
 
         while (_countEnemies < _maxCountEnemies)
-        {   
+        {
             Instantiate(_enemy, _spawnPoints[_spawnTarget].position, _spawnPoints[_spawnTarget].rotation);
             _countEnemies++;
             _spawnTarget++;
