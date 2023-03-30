@@ -17,7 +17,7 @@ public class PersonControl : MonoBehaviour
     [SerializeField] private UnityEvent _personStop;
     [SerializeField] private UnityEvent _personJump;
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
     }

@@ -4,6 +4,7 @@ public class Animation : MonoBehaviour
 {
     const string JumpTrigger = "Jump";
     const string IsWalk = "IsWalk";
+    const string DeadTrigger = "Dead";
 
     [SerializeField] private Animator _animator;
 
@@ -21,4 +22,10 @@ public class Animation : MonoBehaviour
     {
         _animator.SetBool(IsWalk, false);
     }
+
+    public void Dead()
+    {
+        _animator.SetTrigger(DeadTrigger);
+    }
+
 }
