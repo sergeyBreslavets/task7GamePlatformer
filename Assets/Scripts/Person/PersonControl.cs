@@ -24,12 +24,8 @@ public class PersonControl : MonoBehaviour
 
     private void Move()
     {
-        if (Input.GetKey(_right))
-            MoveHorizont(_speed * Time.deltaTime, _personMoveRight);
-        else if (Input.GetKey(_left))
-            MoveHorizont(_speed * Time.deltaTime * -1, _personMoveLeft);
-        else
-            _personStop.Invoke();
+        float direction = Input.GetAxis("Horizontal");
+        MoveHorizont(_speed * Time.deltaTime * direction);
 
         if (Input.GetKey(_jump) && IsGrounded())
         {
@@ -38,9 +34,15 @@ public class PersonControl : MonoBehaviour
         }
     }
 
-    private void MoveHorizont(float x, UnityEvent eventPerson)
+    private void MoveHorizont(float x)
     {
-        eventPerson.Invoke();
+        if (x > 0)
+            _personMoveRight.Invoke();
+        else if (x < 0)
+            _personMoveLeft.Invoke();
+        else
+            _personStop.Invoke();
+
         transform.Translate(x, 0, 0);
     }
 

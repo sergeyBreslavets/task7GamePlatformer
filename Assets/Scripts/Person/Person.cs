@@ -10,7 +10,7 @@ public class Person : MonoBehaviour
     private Vector3 _initPosition;
     private Coroutine _killAnimation;
 
-    public void Start()
+    private void Start()
     {
         _initPosition = transform.position;
     }

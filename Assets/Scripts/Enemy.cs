@@ -30,11 +30,9 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Person _target;
-
-        if (collision.transform.TryGetComponent<Person>(out _target))
+        if (collision.transform.TryGetComponent<Person>(out Person target))
         {
-            _target.Kill();
+            target.Kill();
         }
     }
 }

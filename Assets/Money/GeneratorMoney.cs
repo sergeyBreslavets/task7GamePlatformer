@@ -38,7 +38,9 @@ public class GeneratorMoney : MonoBehaviour
 
         while (_countEnemies < _maxCountEnemies)
         {
-            Instantiate(_enemy, _spawnPoints[_spawnTarget].position, _spawnPoints[_spawnTarget].rotation);
+            Vector3 positionSpawn = _spawnPoints[_spawnTarget].position;
+            positionSpawn.z = 0;
+            Instantiate(_enemy, positionSpawn, _spawnPoints[_spawnTarget].rotation);
             _countEnemies++;
             _spawnTarget++;
         }
