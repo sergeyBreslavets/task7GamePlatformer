@@ -5,11 +5,7 @@ public class PersonControl : MonoBehaviour
 {
     [SerializeField] private float _speed = 3;
     [SerializeField] private float _jumpForce = 20;
-    [SerializeField] private CapsuleCollider2D _capsuleCollider;
     [SerializeField] private Rigidbody2D _rigidbody2d;
-
-    [SerializeField] private KeyCode _left = KeyCode.A;
-    [SerializeField] private KeyCode _right = KeyCode.D;
     [SerializeField] private KeyCode _jump = KeyCode.Space;
 
     [SerializeField] private UnityEvent _personMoveLeft;
@@ -22,6 +18,18 @@ public class PersonControl : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision != null && collision.transform.TryGetComponent<Ground>(out Ground ground))
+            _isGrounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision != null && collision.transform.TryGetComponent<Ground>(out Ground ground))
+            _isGrounded = false;
     }
 
     private void Move()
@@ -46,21 +54,5 @@ public class PersonControl : MonoBehaviour
             _personStop.Invoke();
 
         transform.Translate(x, 0, 0);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision != null && collision.transform.TryGetComponent<Ground>(out Ground ground))
-        {
-            _isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision != null && collision.transform.TryGetComponent<Ground>(out Ground ground))
-        {     
-            _isGrounded = false;
-        }
     }
 }
