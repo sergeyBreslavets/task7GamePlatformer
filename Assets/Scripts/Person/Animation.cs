@@ -27,5 +27,4 @@ public class Animation : MonoBehaviour
     {
         _animator.SetTrigger(DeadTrigger);
     }
-
 }
