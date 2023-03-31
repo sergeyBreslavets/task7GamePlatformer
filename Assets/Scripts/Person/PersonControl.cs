@@ -17,6 +17,8 @@ public class PersonControl : MonoBehaviour
     [SerializeField] private UnityEvent _personStop;
     [SerializeField] private UnityEvent _personJump;
 
+    private bool _isGrounded = true;
+
     private void FixedUpdate()
     {
         Move();
@@ -27,7 +29,7 @@ public class PersonControl : MonoBehaviour
         float direction = Input.GetAxis("Horizontal");
         MoveHorizont(_speed * Time.deltaTime * direction);
 
-        if (Input.GetKey(_jump) && IsGrounded())
+        if (Input.GetKey(_jump) && _isGrounded)
         {
             _personJump.Invoke();
             _rigidbody2d.AddForce(Vector2.up * _jumpForce, ForceMode2D.Force);
@@ -46,14 +48,19 @@ public class PersonControl : MonoBehaviour
         transform.Translate(x, 0, 0);
     }
 
-    private bool IsGrounded()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        float offset = .01f;
-        float halfColliderY = _capsuleCollider.size.y / 2f;
-        Vector2 origin = new Vector2(transform.position.x, transform.position.y - halfColliderY - offset);
-        float distance = 0.1f;
-        RaycastHit2D groundCheck = Physics2D.Raycast(origin, -transform.up, distance);
-        bool isGround = groundCheck && groundCheck.transform.TryGetComponent<Ground>(out Ground ground);
-        return isGround;
+        if(collision != null && collision.transform.TryGetComponent<Ground>(out Ground ground))
+        {
+            _isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision != null && collision.transform.TryGetComponent<Ground>(out Ground ground))
+        {     
+            _isGrounded = false;
+        }
     }
 }

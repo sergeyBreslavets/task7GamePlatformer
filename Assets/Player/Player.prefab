@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _jumpForce: 100
+  _jumpForce: 150
   _capsuleCollider: {fileID: 8564917964333330318}
   _rigidbody2d: {fileID: -3232014935835986577}
   _left: 97

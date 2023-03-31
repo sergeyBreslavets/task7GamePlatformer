@@ -10,9 +10,8 @@ public class Pick : MonoBehaviour
 
         if (collision.transform.TryGetComponent<Money>(out money))
         {
-            _pickMoney.Invoke();
             Destroy(money.gameObject);
-
+            _pickMoney.Invoke();
         }
     }
 }
